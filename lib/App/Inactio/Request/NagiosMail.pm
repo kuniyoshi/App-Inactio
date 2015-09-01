@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 package App::Inactio::Request::NagiosMail;
+use parent "App::Inactio::Request";
 use Data::Dumper;
 use Path::Class qw( dir );
 use MIME::Parser;

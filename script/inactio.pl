@@ -19,6 +19,7 @@ my $req = App::Inactio::Request::NagiosMail->new( do { local $/; <> } );
 
 my $app = App::Inactio->new(
     request => $req,
+    config  => "inactio.conf.pl",
 );
 
 if ( $req->is_error ) {
