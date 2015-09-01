@@ -32,7 +32,7 @@ sub new {
 sub get_api_key {
     my $self         = shift;
     my $project_name = shift;
-    my $api_key = $self->{config}{ $project_name }{api_key} || $self->{config}{last_stand}
+    my $api_key = $self->{config}{ $project_name }{api_key} || $self->{config}{last_stand}{api_key}
         or die "Could not get api_key of $project_name";
     return $api_key;
 }
