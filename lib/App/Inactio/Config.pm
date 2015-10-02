@@ -30,6 +30,12 @@ sub new {
     }, $class;
 }
 
+sub is_api_key_last_stand {
+    my $self    = shift;
+    my $api_key = shift;
+    return $api_key eq $self->{config}{project}{ $LAST_STAND_SERVICE_NAME }{api_key};
+}
+
 sub get_api_key {
     my $self         = shift;
     my $project_name = shift;

@@ -52,12 +52,22 @@ sub dump {
     return Data::Dumper->new( [ @_ ] )->Terse( 1 )->Sortkeys( 1 )->Useqq( 1 )->Indent( 0 )->Dump;
 }
 
+sub is_last_stand {
+    my $self = shift;
+    return $self->config->is_api_key_last_stand( $self->reactio->{api_key} );
+}
+
 sub create_incident {
     my $self = shift;
 
     my %param = $self->request->expand_param;
     my $name = $self->request->name
         or die "Could not get name";
+
+    if ( $self->is_last_stand ) {
+        $param{notification_text} = $self->request->description;
+        $name = $param{notification_text};
+    }
 
     $param{notification_call} = JSON::true;
     $param{topics} ||= [ ];
