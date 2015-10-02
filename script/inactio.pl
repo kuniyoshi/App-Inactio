@@ -33,10 +33,10 @@ if ( $req->is_error ) {
 
     eval {
         post_chatwork(
-            url   => $app->get_incident_url( $res_ref->{id} ),
-            name  => $req->name,
-            body  => $req->body,
-            token => $app->config->{config}{chatwork_token},
+            url         => $app->get_incident_url( $res_ref->{id} ),
+            name        => $req->name,
+            description => $req->description,
+            token       => $app->config->{config}{chatwork_token},
         );
     };
 
@@ -56,7 +56,8 @@ else {
 exit;
 
 sub post_chatwork {
-    my( $url, $name, $body, $token ) = @{ { @_ } }{ qw( url name body token ) };
+    my( $url, $name, $description, $token )
+    = @{ { @_ } }{ qw( url name description token ) };
 
     my $chatwork = WebService::ChatWorkApi->new(
         api_token => $token,
@@ -67,7 +68,7 @@ sub post_chatwork {
     my $message = WebService::ChatWork::Message->new(
         info => (
             title   => "INACTIO ALERT - $name",
-            message => "reactio:\n$url\n\n$body",
+            message => "reactio:\n$url\n\n$description",
         ),
     );
 

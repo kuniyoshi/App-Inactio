@@ -30,6 +30,11 @@ sub project_name { shift->hostname }
 
 sub name { shift->service_desc }
 
+sub description {
+    my $self = shift;
+    return $self->name . " of " . $self->project_name;
+}
+
 sub expand_param {
     my $self = shift;
     my %param;

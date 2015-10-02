@@ -63,6 +63,8 @@ sub name {
     die "Could not parse name from: ", $self->subject;
 }
 
+sub description { shift->body }
+
 sub expand_param {
     my $self = shift;
     my %param;
