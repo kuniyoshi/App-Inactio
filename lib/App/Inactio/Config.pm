@@ -9,6 +9,7 @@ Readonly my %DEFAULT => (
     max_call_count   => 30,
     interval_seconds => 60,
 );
+Readonly my $LAST_STAND_SERVICE_NAME => "last_stand";
 
 sub new {
     my $class    = shift;
@@ -32,7 +33,7 @@ sub new {
 sub get_api_key {
     my $self         = shift;
     my $project_name = shift;
-    my $api_key = $self->{config}{ $project_name }{api_key} || $self->{config}{last_stand}{api_key}
+    my $api_key = $self->{config}{project}{ $project_name }{api_key} || $self->{config}{project}{ $LAST_STAND_SERVICE_NAME }{api_key}
         or die "Could not get api_key of $project_name";
     return $api_key;
 }
